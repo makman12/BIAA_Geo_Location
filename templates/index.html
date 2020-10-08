@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>BIAA API</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    </head>
+    <body class="bg-light">
+        <br>
+        <hr class="style1">
+        <br>
+        <h3 class="display-4 text-center text-primary">BIAA Geo Location</h3>
+        <br>
+        <hr class="style1">
+        <br>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <form class="form-horizontal" method="POST" action="/ssearch" >
+                        <fieldset>
+                            <!-- Form Name -->
+                            <legend class="float-left" >Search Geo Location Info</legend>
+                            <!-- Text input-->
+                            <div class="form-group w-75">
+                                <label class="control-label" for="locname">Location Name</label> 
+                                <input id="locname" name="locname" type="text" placeholder="Hattusa" class="form-control" required="">
+                            </div>
+                            <!-- Search input-->
+                            <div class="form-group w-75">
+                                <label class=" control-label" for="searchinput">City</label>
+                                <div class="">
+                                    <input id="City" name="City" list="cities" placeholder="Çorum" class="form-control input-lg" required="">
+                                    <datalist id="cities">
+                                        {% for i in cities %}
+                                        <option value="{{ i }}">
+                                            {% endfor %}
+                                    </datalist>
+                                </div>
+                            </div>
+                            <!-- Multiple Radios -->
+                            <div class="form-group">
+                            <label class=" control-label" for="radios">Modern or Ancient Site</label>
+                            <div class="">
+                            <div class="radio">
+                            <label for="radios-0">
+                            <input type="radio" name="Modern" id="radios-0" value="True" >
+                            Modern
+                            </label>
+                            </div>
+                            <div class="radio">
+                            <label for="radios-1">
+                            <input type="radio" name="Modern" id="radios-1" value="False" checked="checked">
+                            Ancient
+                            </label>
+                            </div>
+                            </div>
+                            <div>
+                            <input class="btn btn-primary btn-lg w-75" type="submit" value="Submit">
+                            </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="col-md-4">
+                <legend class="text-center" >Search for Multiple Location</legend>
+                <p>	If you wish you can upload an excel file by filling <a href="{{url_for('static', filename='template.xlsx')}}">template</a>. With this method, you can search as many locations  as you wish at the same time and download the results in .xlsx format. </p>
+                <form action="/msearch" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                <label for="exampleFormControlFile1">Upload your excel file</label>
+                <input name="data" type="file" class="form-control-file" id="exampleFormControlFile1" accept=".xlsx">
+                </div>
+                <div>
+                <input class="btn btn-primary btn-lg btn-block" type="submit" value="Submit">
+                </div>
+                </form>
+                </div>
+            </div>
+        </div>
+        <br>
+        <hr class="style1">
+        <br>
+    </body>
+</html>
